@@ -26,10 +26,10 @@ int main(void)
 	
 	// after calling x_init(), the running thread is "thread 0"
 	x_init();
-	x_new(1, thread1, true);
-	x_new(2, thread2, true);
-	x_new(3, thread3, true);
-	x_new(4, thread4, true);
+	//x_new(1, thread1, true);
+	//x_new(2, thread2, true);
+	//x_new(3, thread3, true);
+	//x_new(4, thread4, true);
 	x_new(5, helloThread, true);
 	
 	// We are thread 0 now
@@ -102,12 +102,11 @@ void thread4() {
 void helloThread() {
 	Serial_open(0, 115200L, SERIAL_8N1);
 	char *str = "Hello!\n";
-	int c;
 	while(1)
 	{
-		if((c = Serial_read(0)) > 0) {
-			Serial_write(0, c);
-		}
-		x_yield();
+		for(int i = 0; i < 7; i++)
+			Serial_write(0, str[i]);
+		x_delay(1000);
+		//x_yield();
 	}
 }
